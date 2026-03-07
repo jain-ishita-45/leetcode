@@ -23,7 +23,6 @@ class Solution {
         cur=head;
         for(int i=1;i<c-n;i++)
         cur=cur.next;
-        if(cur.next!=null)
         cur.next=cur.next.next;
         return head;
     }
