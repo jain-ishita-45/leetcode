@@ -10,34 +10,37 @@
  */
 class Solution {
     public ListNode rotateRight(ListNode head, int k) {
-    if (head == null || head.next == null || k == 0) return head;
+        ListNode cur=head;
+        int c=0;
+        if(head==null || head.next==null)
+        return head;
+        if(k==0) return head;
+        while(cur!=null)
+        {
+            cur=cur.next;
+            c++;
+        }
+             if(c==0) return null;
+        k=(k)%c;
+          if(k==0) return head;
+        int n=0;
+        ListNode prev=null;
+        ListNode temp=head;
+        while((c-n)!=k)
+        {
+            n++;
+            prev=temp;
+            temp=temp.next;
+        }
+        prev.next=null;
+        ListNode newhead=temp;
+        while(temp.next!=null)
+        {
+            temp=temp.next;
+        }
+        temp.next=head;
+        return newhead;
 
-    // Step 1: Count the length of the list
-    int length = 1;
-    ListNode tail = head;
-    while (tail.next != null) {
-        tail = tail.next;
-        length++;
+        
     }
-
-    // Step 2: Normalize k
-    k = k % length;
-    if (k == 0) return head;
-
-    // Step 3: Make the list circular temporarily
-    tail.next = head;
-
-    // Step 4: Find the new tail (length - k) and new head
-    int stepsToNewHead = length - k;
-    ListNode newTail = head;
-    for (int i = 1; i < stepsToNewHead; i++) {
-        newTail = newTail.next;
-    }
-
-    ListNode newHead = newTail.next;
-    newTail.next = null; // Break the loop
-
-    return newHead;
-}
-
 }
