@@ -14,11 +14,7 @@ class Solution {
                 }
             }
         }
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<m;j++)
-            System.out.println(matrix[i][j]);
-        }
+        
         for(int i=0;i<n;i++)
         {
             m=matrix[0].length-1;
