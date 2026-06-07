@@ -1,31 +1,28 @@
 class Solution {
-
-    public boolean ismatch(char a , char b)
-    {
-        if((a=='(' && b==')')|| (a=='[' && b==']') || a=='{' && b=='}')
-        return true;
-        return false;
-    }
     public boolean isValid(String s) {
         Stack<Character> st=new Stack<>();
-
+        if(s.length()==1) return false;
         for(int i=0;i<s.length();i++)
         {
-            if(s.charAt(i)=='('|| s.charAt(i)=='[' || s.charAt(i)=='{')
-            st.push(s.charAt(i));
-        
-        else if( s.charAt(i)==')'|| s.charAt(i)==']' || s.charAt(i)=='}')
-        {
-            if(st.isEmpty()) return false;
-            else
-            {
-                char x=st.pop();
-                if(!ismatch(x,s.charAt(i))) return false;
-            }
-        }
-        }
-        if(!st.isEmpty()) return false;
-        return true;
 
+            char ch=s.charAt(i);
+            if(ch=='(' || ch=='{' || ch=='[')
+            st.push(ch);
+            else if(!st.isEmpty())
+            {
+                if(ch==')' && st.peek()=='(')
+                st.pop();
+                else if(ch=='}' && st.peek()=='{')
+                st.pop();
+                else if(ch==']' && st.peek()=='[')
+                st.pop();
+                else return false;
+                
+            }
+            else
+            return false;
+
+        }
+        return st.isEmpty();
     }
 }
