@@ -1,28 +1,28 @@
 class Solution {
     public String addBinary(String a, String b) {
-        int n=a.length()-1,m=b.length()-1;
-        int sum=0,carry=0;
-        String ans="";
-        while(n>=0 || m>=0)
+        StringBuilder result=new StringBuilder();
+        if(a.length()<b.length())
+        return addBinary(b,a);
+        int i=a.length()-1,j=b.length()-1,carry=0,sum=0;
+        while(i>=0 || j>=0)
         {
-            sum=carry;
-            if(n>=0)
+             sum=carry;
+            if(i>=0)
             {
-                sum+=a.charAt(n)-'0';
-                n--;
+                sum+=a.charAt(i)-'0';
+                i--;
             }
-            if(m>=0)
+           
+            if(j>=0)
             {
-                sum+=b.charAt(m)-'0';
-                m--;
+                sum+=b.charAt(j)-'0';
+                j--;
             }
-           ans+=((sum%2==0)? '0' : '1');
+            result.append((sum%2==0)?'0':'1');
             carry=sum>1?1:0;
+
         }
-        if(carry==1)
-        ans+=1;
-        StringBuilder a1=new StringBuilder(ans);
-        a1.reverse();
-        return a1.toString();
+        if(carry==1) result.append(1);
+        return result.reverse().toString();
     }
 }
