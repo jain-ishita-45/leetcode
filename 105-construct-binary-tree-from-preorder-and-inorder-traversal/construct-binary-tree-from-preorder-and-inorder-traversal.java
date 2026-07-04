@@ -14,24 +14,31 @@
  * }
  */
 class Solution {
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-        Map<Integer,Integer> in=new HashMap<Integer,Integer>();
-        for(int i=0;i<inorder.length;i++)
-        in.put(inorder[i],i);
-        TreeNode root=builde(preorder,0,preorder.length-1,inorder,0,inorder.length-1,in);
+    int idx=0;
+
+    public int search(int []preorder, int []inorder, int val, int left, int right)
+    {
+        for(int i=left;i<=right;i++)
+        {
+            if(val==inorder[i])
+            return i;
+        }
+        return -1;
+    }
+
+    public TreeNode helper(int []preorder, int []inorder,  int left, int right)
+    {
+        if(left>right) return null;
+        TreeNode root=new TreeNode(preorder[idx++]);
+        int x=search(preorder, inorder, root.val,left,right);
+        root.left=helper(preorder, inorder, left,x-1);
+        root.right=helper(preorder, inorder, x+1,right);
         return root;
 
     }
-
-    public TreeNode builde(int[] preorder,int prestart,int preend,int[]inorder,int instart,int inend,Map<Integer,Integer>in )
-    {
-        if(prestart>preend|| instart>inend)
-        return null;
-        TreeNode root=new TreeNode(preorder[prestart]);
-        int inroot=in.get(root.val);
-        int numsleft=inroot-instart;
-        root.left=builde(preorder,prestart+1,prestart+numsleft,inorder,instart,inroot-1,in);
-        root.right=builde(preorder,prestart+1+numsleft,preend,inorder,inroot+1,inend,in);
-        return root;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        int preind=0;
+        return helper(preorder, inorder, 0, inorder.length-1);
+        
     }
 }
