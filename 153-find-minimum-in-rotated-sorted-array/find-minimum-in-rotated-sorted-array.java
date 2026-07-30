@@ -7,15 +7,15 @@ class Solution {
             int mid=(low+high)/2;
             if(arr[low]<=arr[mid])
             {
-                ans=Math.min(ans,arr[low]);
-                low=mid+1;
+                ans=Math.min(arr[low],ans);
+                  low=mid+1;
+                
             }
-            else
+            else if(arr[mid]<=arr[high])
             {
-                  ans=Math.min(ans,arr[mid]);
-                high=mid-1;
+                ans=Math.min(arr[mid],ans);
+              high=mid-1;
             }
-
         }
         return ans;
     }
