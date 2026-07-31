@@ -1,23 +1,24 @@
 class Solution {
-    public int trap(int[] arr) {
-        int lmax=0, rmax=0,total=0,l=0,r=arr.length-1;
-        while(l<r)
+    public int trap(int[] height) {
+        int total=0;
+        int lmax=height[0],rmax=height[height.length-1],l=0,r=height.length-1;
+        while(l<=r)
         {
-            if(arr[l]<=arr[r])
+            if(height[l]<=height[r])
             {
-                if(lmax>arr[l])
-                total+=lmax-arr[l];
+                if(height[l]<=lmax)
+                total+=lmax-height[l];
                 else
-                lmax=arr[l];
-                l=l+1;
+                lmax=height[l];
+                l++;
             }
             else
             {
-                if(rmax>arr[r])
-                total+=rmax-arr[r];
+                if(height[r]<=rmax)
+                total+=rmax-height[r];
                 else
-                rmax=arr[r];
-                r=r-1;
+                rmax=height[r];
+                r--;
             }
         }
         return total;
