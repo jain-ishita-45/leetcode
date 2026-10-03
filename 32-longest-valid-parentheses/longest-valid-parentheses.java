@@ -14,10 +14,8 @@ class Solution {
                 st.pop();
                 if(st.isEmpty() )
                 {
-                   st.push(i);
-                   
+                   st.push(i);   
                 }
-                
                 else
                 {
                     ans=Math.max(ans,i-st.peek());
